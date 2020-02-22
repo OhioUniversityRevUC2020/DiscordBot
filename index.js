@@ -22,38 +22,22 @@ client.on("message", (message) => {
     length = parameters.length;
     switch(parameters[0].toLowerCase()){
         case "!mc":
-            switch(parameters[1].toLowerCase()){
-                case "tinybrain":
-                    console.log(typeof message.guild.id);
-                    break;
-                case "link":
-                    // Check if user input a username
-                    if (parameters.length > 2) {
-                        var username = parameters[2];
-                        var options = {
-                            uri: "https://www.google.com", // change to /user/link
-                            XDiscordServer: message.guild.id,
-                            method: "POST",
-                            userId: message.author.id,
-                            minecraftName: username
-                        };
-
-                        rp(options)
-                            .then(function () {
-                                message.channel.send("Howdy World!");
-                            })
-                            .catch(function (err) {
-                                message.channel.send("Oh god oH fuck");
-                            });
-                    } else {
-                        message.reply("Usage: !mc link <username>\nUse !mc for help.");
-                    }
-                    break;
-                case "unlink":
-
+            if (parameters.length > 1) {
+                switch(parameters[1].toLowerCase()){
+                    case "tinybrain":
+                        console.log(typeof message.guild.id);
+                        break;
+                    case "link":
+                        if (parameters.length === 3) {
+                            link(message, parameters[2]);
+                        } else {
+                            message.reply("Usage: !mc link <username>\nUse !mc for help.");
+                        }
+                        break;
+                    case "unlink":
                         break;
                 }
-            }else{
+            } else {
                 message.channel.send("!mc - Display this help page\n!mc start - Start your Minecraft server" +
                 "\n!mc link - Link your account to your Discord Id\n!mc create - Instantly boot up a vanilla minecraft server" +
                 "\n!mc credits - Display your remaining credits before you git fucked");
@@ -63,21 +47,23 @@ client.on("message", (message) => {
     }
 });
 
-function link(message, script){
-    message.author.send(script);
-    name = client.on("message", (message) => {
-        return message;
-    });
+function link(message, username){
+    // Check if user input a username
     var options = {
-        method: 'POST',
-        uri: 'https://google.com/user/link',
-        body: {
-            userId: message.author.id,
-            minecraftName: name
-        }
-    }
-    rp(options);
-    return n;
+        uri: "https://www.google.com", // change to /user/link
+        XDiscordServer: message.guild.id,
+        method: "POST",
+        userId: message.author.id,
+        minecraftName: username
+    };
+
+    rp(options)
+        .then(function () {
+            message.channel.send("Howdy World!");
+        })
+        .catch(function (err) {
+            message.channel.send("Oh god oH fuck");
+        });
 }
 
 client.login(auth.token);
