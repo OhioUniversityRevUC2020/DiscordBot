@@ -140,7 +140,7 @@ function start(message, serverName) {
         XDiscordServer: message.guild.id,
         method: "POST",
         name: serverName,
-        json: true;
+        json: true
     };
 
     rp(options)
