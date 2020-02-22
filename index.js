@@ -13,14 +13,13 @@ client.on ("ready", () => {
     console.log("Ready!");
 });
 
-
-
 client.on("message", (message) => {
     console.log(message.author.username);
     var result = "";
     console.log("Message Received!");
     let parameters = message.content.split(" ");
     console.log(parameters[0]);
+    length = parameters.length;
     switch(parameters[0].toLowerCase()){
         case "!mc":
             switch(parameters[1].toLowerCase()){
@@ -52,17 +51,33 @@ client.on("message", (message) => {
                     break;
                 case "unlink":
 
-                    break;
+                        break;
+                }
+            }else{
+                message.channel.send("!mc - Display this help page\n!mc start - Start your Minecraft server" +
+                "\n!mc link - Link your account to your Discord Id\n!mc create - Instantly boot up a vanilla minecraft server" +
+                "\n!mc credits - Display your remaining credits before you git fucked");
             }
             break;
-
+        default:
     }
 });
 
-function messag(message, script){
+function link(message, script){
     message.author.send(script);
-
-    return "Dj73960";
+    name = client.on("message", (message) => {
+        return message;
+    });
+    var options = {
+        method: 'POST',
+        uri: 'https://google.com/user/link',
+        body: {
+            userId: message.author.id,
+            minecraftName: name
+        }
+    }
+    rp(options);
+    return n;
 }
 
 client.login(auth.token);
