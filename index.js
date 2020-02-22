@@ -15,17 +15,33 @@ client.on ("ready", () => {
 
 
 client.on("message", (message) => {
-    console.log(message.content);
+    console.log(message.author.username);
     var result = "";
     console.log("Message Received!");
     let parameters = message.content.split(" ");
     console.log(parameters[0]);
     switch(parameters[0].toLowerCase()){
-        case "hello":
-            message.reply("World");
+        case "!mc":
+            switch(parameters[1].toLowerCase()){
+                case "start":
+
+                    break;
+                case "link":
+                    user = messag(message, "Please reply with your username: ");
+                    break;
+                case "unlink":
+
+                    break;
+            }
             break;
 
     }
 });
+
+function messag(message, script){
+    message.author.send(script);
+    
+    return "Dj73960";
+}
 
 client.login(auth.token);
