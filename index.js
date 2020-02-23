@@ -14,7 +14,7 @@ client.on ("ready", () => {
 });
 
 client.on("message", (message) => {
-    console.log(message.author.username);
+    console.log(message.author.id);
     var result = "";
     console.log("Message Received!");
     let parameters = message.content.split(" ");
@@ -25,7 +25,7 @@ client.on("message", (message) => {
             if (parameters.length > 1) {
                 switch(parameters[1].toLowerCase()){
                     case "tinybrain":
-                        message.channel.send("@Dj73960");
+                        message.channel.send("<@447895186010275850>");
                         break;
                     case "link":
                         if (parameters.length === 3) {
@@ -77,7 +77,7 @@ client.on("message", (message) => {
 async function link(message, username){
     // Check if user input a username
     var options = {
-        uri: "http://35.222.79.226/user/link",
+        uri: "http://api.rev-uc-2020.asq.digital/user/link",
         headers: {
             "X-Discord-Server": message.guild.id,
         },
@@ -100,7 +100,7 @@ async function link(message, username){
 async function unlink(message, username) {
     // Check if user input a username
     var options = {
-        uri: "http://35.222.79.226/user/unlink",
+        uri: "http://api.rev-uc-2020.asq.digital/user/unlink",
         headers: {
             "X-Discord-Server": message.guild.id
         },
@@ -122,7 +122,7 @@ async function unlink(message, username) {
 
 async function create(message, serverName) {
     var options = {
-        uri: "http://35.222.79.226/server/create",
+        uri: "http://api.rev-uc-2020.asq.digital/server/create",
         headers: {
             "X-Discord-Server": message.guild.id
         },
@@ -144,7 +144,7 @@ async function create(message, serverName) {
 
 async function start(message, serverName) {
     var options = {
-        uri: "http://35.222.79.226/server/start",
+        uri: "http://api.rev-uc-2020.asq.digital/server/start",
         headers: {
             "X-Discord-Server": message.guild.id
         },
@@ -165,7 +165,7 @@ async function start(message, serverName) {
 
 async function credits(message, userId) {
     var options = {
-        uri: "http://35.222.79.226/user/credits?id=" + userId,
+        uri: "http://api.rev-uc-2020.asq.digital/user/credits?id=" + userId,
         headers: {
             "X-Discord-Server": message.guild.id
         },
