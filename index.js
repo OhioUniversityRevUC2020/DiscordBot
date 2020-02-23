@@ -173,9 +173,12 @@ async function credits(message, userId) {
     };
 
     try {
+        console.log(options);
         const body = await rp(options);
-        message.reply(message.content);
+        console.log(body);
+        message.reply(body.credits);
     } catch (e) {
+        console.log(e);
         message.channel.send("Error using " + message.content);
     }
 }
