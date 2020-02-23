@@ -75,100 +75,113 @@ client.on("message", (message) => {
     }
 });
 
-function link(message, username){
+async function link(message, username){
     // Check if user input a username
     var options = {
-        uri: "https://35.222.79.226/user/link",
-        XDiscordServer: message.guild.id,
+        uri: "http://35.222.79.226/user/link",
+        headers: {
+            "X-Discord-Server": message.guild.id,
+        },
         method: "POST",
-        userId: message.author.id,
-        minecraftName: username,
+        body: {
+            userId: message.author.id,
+            minecraftName: username,
+        },
         json: true
     };
 
-    rp(options)
-        .then(function (body) {
-            message.reply(message.content);
-        })
-        .catch(function (err) {
-            message.channel.send("Error using " + message.content);
-        });
+    try {
+        const body = await rp(options);
+        message.reply(message.content);
+    } catch (e) {
+        message.channel.send("Error using " + message.content);
+    }
 }
 
-function unlink(message, username) {
+async function unlink(message, username) {
     // Check if user input a username
     var options = {
-        uri: "https://35.222.79.226/user/unlink",
-        XDiscordServer: message.guild.id,
+        uri: "http://35.222.79.226/user/unlink",
+        headers: {
+            "X-Discord-Server": message.guild.id
+        },
         method: "POST",
-        userId: message.author.id,
-        minecraftName: username,
+        body: {
+            userId: message.author.id,
+            minecraftName: username
+        },
         json: true
     };
 
-    rp(options)
-        .then(function (body) {
-            message.reply(message.content);
-        })
-        .catch(function (err) {
-            message.channel.send("Error using " + message.content);
-        });
+    try {
+        const body = await rp(options);
+        message.reply(message.content);
+    } catch (e) {
+        message.channel.send("Error using " + message.content);
+    }
 }
 
-function create(message, serverName) {
+async function create(message, serverName) {
     var options = {
-        uri: "https://35.222.79.226/server/create",
-        XDiscordServer: message.guild.id,
+        uri: "http://35.222.79.226/server/create",
+        headers: {
+            "X-Discord-Server": message.guild.id
+        },
         method: "POST",
-        name: serverName,
-        creatorId: message.author.id,
+        body: {
+            name: serverName,
+            creatorId: message.author.id
+        },
         json: true
     };
 
-    rp(options)
-        .then(function (body) {
-            message.reply(message.content);
-        })
-        .catch(function (err) {
-            message.channel.send("Error using " + message.content);
-        });
+    try {
+        const body = await rp(options);
+        message.reply(message.content);
+    } catch (e) {
+        message.channel.send("Error using " + message.content);
+    }
 }
 
-function start(message, serverName) {
+async function start(message, serverName) {
     var options = {
-        uri: "https://35.222.79.226/server/start",
-        XDiscordServer: message.guild.id,
+        uri: "http://35.222.79.226/server/start",
+        headers: {
+            "X-Discord-Server": message.guild.id
+        },
         method: "POST",
-        name: serverName,
+        body: {
+            name: serverName
+        },
         json: true
     };
 
-    rp(options)
-        .then(function (body) {
-            message.reply(message.content);
-        })
-        .catch(function (err) {
-            message.channel.send("Error using " + message.content);
-        });
+    try {
+        const body = await rp(options);
+        message.reply(message.content);
+    } catch (e) {
+        message.channel.send("Error using " + message.content);
+    }
 }
 
-function credits(message, userId) {
+async function credits(message, userId) {
     var options = {
-        uri: "https://35.222.79.226/user/credits?id=" + userId,
-        XDiscordServer: message.guild.id,
+        uri: "http://35.222.79.226/user/credits?id=" + userId,
+        headers: {
+            "X-Discord-Server": message.guild.id
+        },
         json: true
     };
 
-    rp(options)
-        .then(function (body) {
-            message.reply(message.content);
-        })
-        .catch(function (err) {
-            message.channel.send("Error using " + message.content);
-        });
+    try {
+        const body = await rp(options);
+        message.reply(message.content);
+    } catch (e) {
+        message.channel.send("Error using " + message.content);
+    }
 }
 
-function help(message) {
+async function help(message) {
     message.channel.send("!mc - Display this help page\n!mc start - Start your Minecraft server" +
                          "\n!mc link - Link your account to your Discord Id\n!mc create - Instantly boot up a vanilla minecraft server" +
                          "\n!mc credits - Display your remaining credits before you git fucked");
