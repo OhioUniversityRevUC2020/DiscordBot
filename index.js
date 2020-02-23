@@ -50,8 +50,7 @@ client.on("message", (message) => {
                         break;
                     case "start":
                         if (parameters.length > 2) {
-                            message.channel.send(parameters.slice(3).join(" "));
-                            start(message, parameters.slice(3).join(" "));
+                            start(message, parameters.slice(2).join(" "));
                         } else {
                             message.reply("Usage: !mc create <server name>\nUse !mc or !mc help for help.");
                         }
