@@ -43,7 +43,7 @@ client.on("message", (message) => {
                         break;
                     case "create":
                         if (parameters.length > 2) {
-                            create(message, parameters.slice(3).join(" "));
+                            create(message, parameters.slice(2).join(" "));
                         } else {
                             message.reply("Usage: !mc create <server name>\nUse !mc or !mc help for help.");
                         }
@@ -91,8 +91,9 @@ async function link(message, username){
 
     try {
         const body = await rp(options);
-        message.reply(message.content);
+        message.reply("User " + username + " successfully linked!");
     } catch (e) {
+        console.log(e);
         message.channel.send("Error using " + message.content);
     }
 }
@@ -114,9 +115,10 @@ async function unlink(message, username) {
 
     try {
         const body = await rp(options);
-        message.reply(message.content);
+        message.reply("User " + username + " successfully unlinked!");
     } catch (e) {
-        message.channel.send("Error using " + message.content);
+        console.log(e);
+        message.reply("User " + username + " successfully unlinked!");
     }
 }
 
@@ -136,8 +138,9 @@ async function create(message, serverName) {
 
     try {
         const body = await rp(options);
-        message.reply(message.content);
+        message.reply(serverName + " successfully created!");
     } catch (e) {
+        console.log(e);
         message.channel.send("Error using " + message.content);
     }
 }
@@ -157,8 +160,9 @@ async function start(message, serverName) {
 
     try {
         const body = await rp(options);
-        message.reply(message.content);
+        message.reply(serverName + " started at " + body.host + ".");
     } catch (e) {
+        console.log(e);
         message.channel.send("Error using " + message.content);
     }
 }
@@ -173,10 +177,10 @@ async function credits(message, userId) {
     };
 
     try {
-        console.log(options);
+        // console.log(options);
         const body = await rp(options);
-        console.log(body);
-        message.reply(body.credits);
+        // console.log(body);
+        message.reply("your balance is " + body.credits + ".");
     } catch (e) {
         console.log(e);
         message.channel.send("Error using " + message.content);
